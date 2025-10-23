@@ -35,7 +35,7 @@ try {
     llm,
     telemetry, // Enable observability feature.
   })
-    .then({ prompt: "what is volcano sdk?" })
+    .then({ prompt: "Volcano SDKとはなんですか？" })
     .run();
   const firstResult = results[0];
   if (!firstResult || !firstResult.llmOutput) {
