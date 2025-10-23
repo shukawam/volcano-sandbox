@@ -1,0 +1,22 @@
+_format_version: "3.0"
+
+plugins:
+  - name: ai-proxy-advanced
+    route: openai-route
+    config:
+      targets:
+        - route_type: llm/v1/chat
+          auth:
+            header_name: Authorization
+            header_value: Bearer ${{ env "DECK_OPENAI_API_KEY" }}
+          logging:
+            log_payloads: true
+            log_statistics: true
+          model:
+            provider: openai
+            name: gpt-4o-mini
+            options:
+              temperature: 1.0
+              max_tokens: 4096
+              input_cost: 0.15
+              output_cost: 0.6

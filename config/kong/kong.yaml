@@ -9,6 +9,13 @@ services:
         paths:
           - /catalogue
         strip_path: false
+  - name: openai-service
+    url: https://example.com
+    routes:
+      - name: openai-route
+        paths:
+          - /openai
+        strip_path: true
 
 plugins:
   - name: ai-mcp-proxy
