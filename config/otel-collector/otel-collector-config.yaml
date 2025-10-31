@@ -59,7 +59,7 @@ service:
         - otlphttp/tempo
     metrics:
       receivers:
-        - prometheus
+        - otlp
       processors:
         - batch
         - attributes
