@@ -3,7 +3,7 @@ _transform: true
 
 services:
   - name: catalogue-service
-    url: http://catalogue:3000
+    url: http://catalogue:8080
     routes:
       - name: catalogue-route
         paths:
