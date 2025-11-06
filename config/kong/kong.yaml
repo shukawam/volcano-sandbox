@@ -57,10 +57,13 @@ plugins:
                   properties:
                     name:
                       type: string
+                      description: Product name/製品名
                     description:
                       type: string
+                      description: Product description/製品概要
                     price:
-                      type: number
+                      type: integer
+                      description: Product price/製品単価
   # --- Global Plugins ---
   - name: opentelemetry
     config:
