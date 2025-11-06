@@ -1,28 +1,14 @@
 import { agent, llmOpenAI, createVolcanoTelemetry } from "volcano-sdk";
 
-import { NodeSDK } from "@opentelemetry/sdk-node";
-import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
-
 const serviceName = process.env.OTEL_SERVICE_NAME || "volcano-sandbox";
 const otlpEndpoint =
   process.env.OTEL_EXPORTER_OTLP_ENDPOINT || "http://localhost:4318";
 
-const sdk = new NodeSDK({
-  serviceName: serviceName,
-  traceExporter: new OTLPTraceExporter({
-    url: `${otlpEndpoint}/v1/traces`,
-  }),
-});
-
-sdk.start();
-
-// Graceful shutdown
-process.on("SIGTERM", async () => {
-  await sdk.shutdown();
-});
-
 const telemetry = createVolcanoTelemetry({
   serviceName: serviceName,
+  endpoint: otlpEndpoint,
+  traces: true,
+  metrics: true,
 });
 
 const llm = llmOpenAI({
