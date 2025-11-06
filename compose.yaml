@@ -30,7 +30,7 @@ services:
   # --- Kong Gateway ---
   database:
     <<: *default
-    image: postgres:16
+    image: postgres:17
     container_name: database
     environment:
       POSTGRES_USER: kong
@@ -112,7 +112,7 @@ services:
   # --- Tempo ---
   tempo-init:
     <<: *default
-    image: &tempoImage grafana/tempo:2.8.0
+    image: busybox:latest
     container_name: tempo_init
     user: root
     entrypoint:
@@ -130,7 +130,7 @@ services:
       - MEMCACHED_THREADS=4 # Number of threads to use
   tempo:
     <<: *default
-    image: *tempoImage
+    image: grafana/tempo:2.9.0
     container_name: tempo
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
@@ -144,7 +144,7 @@ services:
   # --- Prometheus ---
   prometheus:
     <<: *default
-    image: prom/prometheus:v3.4.1
+    image: prom/prometheus:v3.7.3
     container_name: prometheus
     command:
       - --config.file=/etc/prometheus.yaml
@@ -159,7 +159,7 @@ services:
   # --- Fluent Bit ---
   fluent-bit:
     <<: *default
-    image: fluent/fluent-bit:3.1.2
+    image: fluent/fluent-bit:4.1.1
     container_name: fluent-bit
     command:
       - "--config=/fluent-bit/etc/fluent-bit.yaml"
@@ -169,7 +169,7 @@ services:
   # --- Loki ---
   loki-init:
     <<: *default
-    image: &lokiImage grafana/loki:3.5.1
+    image: busybox:latest
     container_name: loki_init
     user: root
     entrypoint:
@@ -179,7 +179,7 @@ services:
   loki:
     <<: *default
     container_name: loki
-    image: *lokiImage
+    image: grafana/loki:3.5.7
     command: "-config.file=/etc/loki/loki.yaml"
     environment:
       LOG_CLUSTER_DEPTH: "8"
@@ -196,7 +196,7 @@ services:
   # --- OpenTelemetry Collector ---
   otel-collector:
     <<: *default
-    image: otel/opentelemetry-collector-contrib:0.128.0
+    image: otel/opentelemetry-collector-contrib:0.139.0
     container_name: otel-collector
     volumes:
       - ./config/otel-collector/otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
@@ -209,7 +209,7 @@ services:
   # --- Grafana ---
   grafana:
     <<: *default
-    image: grafana/grafana:12.0.1
+    image: grafana/grafana:12.2.1
     container_name: grafana
     volumes:
       - ./config/grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
