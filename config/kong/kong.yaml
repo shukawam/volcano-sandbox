@@ -3,7 +3,7 @@ _transform: true
 
 services:
   - name: catalogue-service
-    url: http://catalogue:8080
+    url: http://catalogue:3000
     routes:
       - name: catalogue-route
         paths:
@@ -30,7 +30,7 @@ plugins:
           method: GET
           path: /catalogue
           annotations:
-            title: get-catalogue
+            title: get-products
         - description: 指定したIDの製品情報を返却します
           method: GET
           path: /catalogue/{id}
@@ -44,6 +44,23 @@ plugins:
               schema:
                 type: integer
               description: Optional product ID
+        - description: 新規製品情報を登録します
+          method: POST
+          path: /catalogue
+          annotations:
+            title: create-product
+          request_body:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
   # --- Global Plugins ---
   - name: opentelemetry
     config:
