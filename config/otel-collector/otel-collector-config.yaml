@@ -55,7 +55,6 @@ service:
         - batch
         - attributes
       exporters:
-        - debug
         - otlphttp/tempo
     metrics:
       receivers:
