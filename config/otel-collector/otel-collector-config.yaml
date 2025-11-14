@@ -49,26 +49,14 @@ exporters:
 service:
   pipelines:
     traces:
-      receivers:
-        - otlp
-      processors:
-        - batch
-        - attributes
-      exporters:
-        - otlphttp/tempo
+      receivers: [otlp]
+      processors: [batch, attributes]
+      exporters: [otlphttp/tempo]
     metrics:
-      receivers:
-        - otlp
-      processors:
-        - batch
-        - attributes
-      exporters:
-        - prometheus
+      receivers: [otlp]
+      processors: [batch, attributes]
+      exporters: [prometheus]
     logs:
-      receivers:
-        - otlp
-      processors:
-        - batch
-        - attributes
-      exporters:
-        - otlphttp/loki
+      receivers: [otlp]
+      processors: [batch, arrtibutes]
+      exporters: [otlphttp/loki]
