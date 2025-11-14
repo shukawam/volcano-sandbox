@@ -20,7 +20,7 @@
     "@opentelemetry/sdk-node": "^0.207.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "volcano-sdk": "^1.0.4"
+    "volcano-sdk": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^24.8.1"
