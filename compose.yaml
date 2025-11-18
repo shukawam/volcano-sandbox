@@ -125,7 +125,6 @@ services:
 
   # --- Tempo ---
   tempo-init:
-    <<: *default
     image: busybox:latest
     container_name: tempo_init
     user: root
@@ -133,6 +132,8 @@ services:
       - chown
       - 10001:10001
       - /var/tempo
+    networks:
+      - volcano-network
   memcached:
     <<: *default
     image: memcached:1.6.38
@@ -182,7 +183,6 @@ services:
 
   # --- Loki ---
   loki-init:
-    <<: *default
     image: busybox:latest
     container_name: loki_init
     user: root
@@ -190,6 +190,8 @@ services:
       - chown
       - 10001:10001
       - /tmp/loki
+    networks:
+      - volcano-network
   loki:
     <<: *default
     container_name: loki
