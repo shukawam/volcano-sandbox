@@ -17,7 +17,28 @@ services:
           - /openai
         strip_path: true
 
+consumers:
+  - username: admin
+    keyauth_credentials:
+      - key: admin-key
+    groups:
+      - name: admin
+  - username: guest
+    keyauth_credentials:
+      - key: guest-key
+    groups:
+      - name: admin
+
+consumer_groups:
+  - name: admin
+  - name: guest
+
 plugins:
+  - name: key-auth
+    route: catalogue-route
+    config:
+      key_names:
+        - apikey
   - name: ai-mcp-proxy
     route: catalogue-route
     config:
@@ -25,6 +46,12 @@ plugins:
         log_payloads: true
         log_statistics: true
       mode: conversion-listener
+      default_acl:
+        - scope: tools
+          allow:
+            - admin
+          deny:
+            - guest
       tools:
         - description: すべての製品情報を返却します
           method: GET

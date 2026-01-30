@@ -17,7 +17,12 @@ const llm = llmOpenAI({
   model: "gpt-4o-mini",
 });
 
-const catalogueTool = mcp(`${gatewayEndpoint}/catalogue`);
+const catalogueTool = mcp(`${gatewayEndpoint}/catalogue`, {
+  auth: {
+    type: "bearer",
+    token: "admin-key"
+  }
+});
 
 const steps = await agent({ llm, telemetry })
   .then({
