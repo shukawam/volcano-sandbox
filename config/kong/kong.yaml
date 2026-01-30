@@ -27,7 +27,7 @@ consumers:
     keyauth_credentials:
       - key: guest-key
     groups:
-      - name: admin
+      - name: guest
 
 consumer_groups:
   - name: admin
